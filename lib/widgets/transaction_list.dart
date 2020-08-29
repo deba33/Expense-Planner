@@ -10,8 +10,7 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return // Transaction Cards
-        Column(
+    return Column(
       children: transactions.map((tx) {
         return Card(
           child: Row(
@@ -60,6 +59,5 @@ class TransactionList extends StatelessWidget {
         );
       }).toList(),
     );
-// End of Transaction Cards;
   }
 }
