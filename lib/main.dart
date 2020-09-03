@@ -13,7 +13,24 @@ class MyApp extends StatelessWidget {
       title: 'Expense Planner',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        accentColor: Colors.purple[900],
+        // accentColor: Colors.purple[900],
+        fontFamily: "Quicksand",
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: TextStyle(
+                fontFamily: "OpenSans",
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        ),
       ),
       home: MyHomePage(),
     );
@@ -27,18 +44,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: "t1",
-      title: "Shoes",
-      amount: 99.9,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t2",
-      title: "Phone",
-      amount: 299.9,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: "t1",
+    //   title: "Shoes",
+    //   amount: 99.9,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: "t2",
+    //   title: "Phone",
+    //   amount: 299.9,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addNewTransactions(String txTitle, double txAmount) {
@@ -82,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               width: double.infinity,
