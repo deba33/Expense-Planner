@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
       title: 'Expense Planner',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        // accentColor: Colors.purple[900],
         fontFamily: "Quicksand",
         textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
