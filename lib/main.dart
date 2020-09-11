@@ -7,7 +7,7 @@ import './widgets/transaction_list.dart';
 import './widgets/chart.dart';
 
 void main() {
-  // Force Portait mode
+  // To Force Portait mode
   // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
@@ -117,9 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandScape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
-
+    final mediaQuery = MediaQuery.of(context);
+    final isLandScape = mediaQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text('Expense Planner'),
       actions: <Widget>[
@@ -129,9 +128,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     );
-    final availHeight = MediaQuery.of(context).size.height -
+    final availHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
     final txListWidget = Container(
       height: availHeight * 0.7,
       child: TransactionList(_userTransactions, _deleteTransaction),
