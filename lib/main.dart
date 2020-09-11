@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import './widgets/transaction_list.dart';
 import './widgets/chart.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  // Force Portait mode
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -61,6 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
+  bool _showChart = false;
+
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
@@ -106,6 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       title: Text('Expense Planner'),
       actions: <Widget>[
@@ -118,6 +132,11 @@ class _MyHomePageState extends State<MyHomePage> {
     final availHeight = MediaQuery.of(context).size.height -
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
+    final txListWidget = Container(
+      height: availHeight * 0.7,
+      child: TransactionList(_userTransactions, _deleteTransaction),
+    );
+
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
@@ -125,19 +144,37 @@ class _MyHomePageState extends State<MyHomePage> {
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: availHeight * 0.299,
-              child: Chart(_recentTransactions),
-            ),
-            Container(
-              color: Theme.of(context).primaryColor,
-              width: MediaQuery.of(context).size.width,
-              height: 1,
-            ),
-            Container(
-              height: availHeight * 0.7,
-              child: TransactionList(_userTransactions, _deleteTransaction),
-            ),
+            //if in landscape show the switch
+            if (isLandScape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Show Chart"),
+                  Switch(
+                    value: _showChart,
+                    onChanged: (val) {
+                      setState(() {
+                        _showChart = val;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            //if not in landscape mode show both chart and list of transactions
+            if (!isLandScape)
+              Container(
+                height: availHeight * 0.3,
+                child: Chart(_recentTransactions),
+              ),
+            if (!isLandScape) txListWidget,
+            //if in landscape mode show either chart or list of transactions
+            if (isLandScape)
+              _showChart
+                  ? Container(
+                      height: availHeight * 0.7,
+                      child: Chart(_recentTransactions),
+                    )
+                  : txListWidget,
           ],
         ),
       ),
