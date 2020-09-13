@@ -57,7 +57,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [];
+  final List<Transaction> _userTransactions = [
+    // Transaction(
+    //   id: "t1",
+    //   title: "Shoes",
+    //   amount: 99.9,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: "t2",
+    //   title: "Phone",
+    //   amount: 299.9,
+    //   date: DateTime.now(),
+    // ),
+  ];
 
   bool _showChart = false;
 
