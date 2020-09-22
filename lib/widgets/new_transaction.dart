@@ -68,18 +68,18 @@ class _NewTransactionsState extends State<NewTransactions> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextField(
-                decoration: InputDecoration(labelText: "Title"),
+                decoration: const InputDecoration(labelText: "Title"),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
               ),
               TextField(
-                decoration: InputDecoration(labelText: "Amount"),
+                decoration: const InputDecoration(labelText: "Amount"),
                 controller: _amountController,
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => _submitData(),
               ),
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 10,
                 ),
@@ -106,7 +106,7 @@ class _NewTransactionsState extends State<NewTransactions> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     AdaptiveFlatButton(
@@ -118,7 +118,7 @@ class _NewTransactionsState extends State<NewTransactions> {
               ),
               RaisedButton(
                 onPressed: _submitData,
-                child: Text(
+                child: const Text(
                   "Add Transaction",
                   style: TextStyle(
                     fontSize: 18,

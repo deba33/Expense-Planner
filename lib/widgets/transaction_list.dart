@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
+import './transaction_Item.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -17,14 +17,14 @@ class TransactionList extends StatelessWidget {
               builder: (ctx, constrains) {
                 return Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
                       "No Transactions added yet",
                       style: Theme.of(context).textTheme.headline6,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
@@ -40,44 +40,8 @@ class TransactionList extends StatelessWidget {
             )
           : ListView.builder(
               itemBuilder: (ctx, index) {
-                return Card(
-                  color: Colors.white70,
-                  elevation: 3,
-                  margin: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 5,
-                  ),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: FittedBox(
-                          child: Text("\$${transactions[index].amount}"),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      transactions[index].title,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    subtitle: Text(
-                      DateFormat.yMMMd().format(transactions[index].date),
-                    ),
-                    trailing: MediaQuery.of(context).size.width > 460
-                        ? FlatButton.icon(
-                            label: Text("Delete"),
-                            icon: Icon(Icons.delete),
-                            onPressed: () => deleteTx(transactions[index].id),
-                            textColor: Theme.of(context).errorColor,
-                          )
-                        : IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: () => deleteTx(transactions[index].id),
-                            color: Theme.of(context).errorColor,
-                          ),
-                  ),
-                );
+                return TransactionItem(
+                    transaction: transactions[index], deleteTx: deleteTx);
               },
               itemCount: transactions.length,
             ),
